@@ -132,9 +132,7 @@ public class GraphEntityMapper implements GraphToEntityMapper<GraphModel> {
                 PropertyReader reader = entityAccessStrategy.getPropertyReader(classInfo, property.getKey().toString());
                 if (reader != null) {
                     Object currentValue = reader.read(instance);
-
-                    //Determine the type of property to merge using the read type(possibly converted) instead of the declared field type
-                    Class paramType = currentValue==null ? writer.type():currentValue.getClass();
+                    Class paramType = writer.type();
                     if (paramType.isArray()) {
                         value = EntityAccess.merge(paramType, (Iterable<?>) value, (Object[]) currentValue);
                     } else {
