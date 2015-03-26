@@ -16,15 +16,33 @@
  * permissions and limitations under the License.
  */
 
-package org.neo4j.ogm.metadata.info;
+package org.neo4j.ogm.domain.incorrect;
 
-import java.io.IOException;
-import java.io.InputStream;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.Relationship;
 
-public interface ClassFileProcessor {
+import java.util.List;
 
-    void process(InputStream inputStream) throws IOException;
-    void validate();
-    void finish();
+public class Topic {
 
+    private Boolean inActive;
+
+    @GraphId
+    private Long topicId;
+
+    public Long getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(Long topicId) {
+        this.topicId = topicId;
+    }
+
+    public Boolean getInActive() {
+        return inActive;
+    }
+
+    public void setInActive(Boolean inActive) {
+        this.inActive = inActive;
+    }
 }

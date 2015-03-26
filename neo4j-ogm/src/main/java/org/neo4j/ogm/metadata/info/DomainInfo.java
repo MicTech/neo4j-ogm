@@ -18,6 +18,7 @@
 
 package org.neo4j.ogm.metadata.info;
 
+import org.neo4j.ogm.metadata.AnnotationsException;
 import org.neo4j.ogm.metadata.ClassPathScanner;
 import org.neo4j.ogm.metadata.MappingException;
 import org.slf4j.Logger;
@@ -123,6 +124,18 @@ public class DomainInfo implements ClassFileProcessor {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    public void validate() {
+        for(ClassInfo classInfo : classNameToClassInfo.values()) {
+            AnnotationValidator validator = new AnnotationValidator(classInfo);
+
+            try {
+                validator.validate();
+            } catch (AnnotationsException e) {
+                e.printStackTrace();
             }
         }
     }
